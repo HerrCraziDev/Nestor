@@ -1,0 +1,17 @@
+{
+    "version": "1.0.01",
+    "name": "Nestor",
+    "path": "self.nestor.bot",
+    "scope": "dev",
+    "bot": {
+        "prefix": "!"
+    },
+    "admin": {
+        "allow": true,
+        "prefix": "@",
+        "roles": [
+            "Nestor",
+            "Staff"
+        ]
+    }
+}

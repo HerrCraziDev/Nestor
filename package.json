@@ -1,0 +1,12 @@
+{
+  "name": "discord-reactbot",
+  "version": "1.0.0",
+  "description": "A Discord bot managing roles with reactions",
+  "main": "index.js",
+  "author": "HerrCrazi <herrcrazi@gmail.com>",
+  "license": "GPL-3.0",
+  "private": false,
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
