@@ -1,0 +1,86 @@
+const Command = require('../Command');
+
+class Roles extends Command {
+    name = "roles"
+    abstract = "Self-attributed roles manager"
+    description = "Allows you to claim or remove self-attributed roles. These roles are configured by the server's staff."
+    version = "1.0"
+    usage = " get <role>|remove <role>|list [all|mine]"
+    hidden = false
+    admin = false
+
+    async give(user, roleName) {
+        let guild = user.guild;
+        let role = guild.roles.cache.find(r => r.name === roleName);
+
+        if (role) {
+            console.log("Trying to give the role " + role.name, role);
+            await user.roles.add(role);
+            return true;
+        }
+        else throw new Error(`:x: Whoops! I've searched far and wide and there's no such role in this server!`);
+    }
+
+    async remove(user, roleName) {
+        let guild = user.guild;
+        let role = guild.roles.cache.find(r => r.name === roleName);
+
+        if (role) {
+            if (user.roles.cache.has(role.id)) {
+                await user.roles.remove(role);
+                return true;
+            }
+            else throw new Error(`:x: Seems you don't have that role in the first place.`);
+        }
+        else throw new Error(`:x: Whoops! I've searched far and wide and there's no such role in this server!`);
+    }
+
+    listRoles(user) {
+        return user.roles.cache.filter(r => r.name !== user.guild.roles.everyone.name); //TODO: filter by managed roles only
+    }
+
+    listAll(guild) {
+        return guild.roles.cache.filter(r => r.name !== user.guild.roles.everyone.name);
+    }
+
+    async execute(context, ...args) {
+        let message = context.message;
+        let user = context.message.member;
+        let guild = context.message.guild;
+
+        console.log(`User ${user.displayName} (${message.author.tag}) has roles :`)
+        guild.roles.cache.forEach(role => {
+            console.log(role.name)
+        });
+        
+        let roleName = args[2]; //TODO :support multi-word role names
+
+        try {
+            switch (args[1]) {
+                case 'get':
+                    await this.give(user, roleName);
+                    message.channel.send(`Here is your ${roleName} role, Sir.`);
+                    break;
+                
+                case 'remove':
+                    await this.remove(user, roleName);
+                    message.channel.send(`You no longer have the ${roleName} role, Sir.`);
+                    break;
+                
+                case 'list':
+                    let roles = "";
+                    this.listRoles(user).forEach(r => roles += `- <@&${r.id}>\n`);
+                    message.channel.send(`**Here are your roles :**\n${roles}`);
+                    break;
+            
+                default:
+                    break;
+            }
+        } catch (e) {
+            console.error(e);
+            message.channel.send(e.message);
+        }
+    }
+};
+
+module.exports = Roles;
