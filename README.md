@@ -1,4 +1,6 @@
 # Nestor
 *Your Discord server's janitor*
 
-<img style="margin: auto; height: 128px" height="128px" src="http://files.herrcrazi.tk/nestor.png" alt="Nestor's logo"/>
+<img style="margin: auto;" height="128px" src="http://files.herrcrazi.tk/nestor.png" alt="Nestor's logo"/>
+
+**Higly WIP. Please do not use yet**
