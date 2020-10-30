@@ -5,4 +5,4 @@
     <img style="margin: auto;" height="128px" src="http://files.herrcrazi.tk/nestor.png" alt="Nestor's logo"/>
 </div>
 
-**Higly WIP. Please do not use yet**
+**Highly WIP. Please do not use yet**
