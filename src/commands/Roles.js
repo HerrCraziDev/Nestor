@@ -9,6 +9,20 @@ class Roles extends Command {
     hidden = false
     admin = false
 
+    constructor(client) {
+        super(client);
+
+        this.client.on('messageReactionAdd', this.onReaction);
+    }
+
+    async onReaction(reaction, user) {
+        if (reaction.partial) await reaction.fetch();
+        if (reaction.message.partial) await reaction.fetch();
+
+        console.log("New reaction on message", reaction);
+        
+    }
+
     async give(user, roleName) {
         let guild = user.guild;
         let role = guild.roles.cache.find(r => r.name === roleName);

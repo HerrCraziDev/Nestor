@@ -9,6 +9,7 @@ class Command {
     admin = false
 
     constructor(client) {
+        //Generic constuctor ; client could not be there.
         this.client = client;
     }
 

@@ -18,7 +18,6 @@ const defaultConf = {
     guilds: []
 }
 
-
 class Bot {
     config = {}
     token = ''
@@ -36,10 +35,11 @@ class Bot {
         if ( !token || typeof token != 'string' ) throw `${__filename} : No API token provided.`;
         else this.token = token;
 
-        this.client = new Discord.Client();
+        this.client = new Discord.Client({partials: ['CHANNEL', 'MESSAGE', 'REACTION']});
         this.commands = new CommandsHandler(this.client, this.config);
     }
 
+    // TODO : move this into CommandHandler to allow multiple scoped command handlers
     parse(message) {
         console.log(`New message : ${message.content}`);
 
