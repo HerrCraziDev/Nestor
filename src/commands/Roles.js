@@ -5,7 +5,7 @@ class Roles extends Command {
     abstract = "Self-attributed roles manager"
     description = "Allows you to claim or remove self-attributed roles. These roles are configured by the server's staff."
     version = "1.0"
-    usage = " get <role>|remove <role>|list [all|mine]"
+    usage = "get <role>|remove <role>|list [all|mine]"
     hidden = false
     admin = false
 

@@ -49,13 +49,14 @@ class Bot {
                 this.commands[command].execute({ message }, ...args);
             } else {
                 console.error(`Unknown command ${command} in message ${message.content}`);
+                message.channel.send(`:x: **Unknown command \`${command}\`**\n*The Sage sat by the Old Yggdrasil, in a furtive gleam of sunlight, and shouted to the lost wanderer "Read the fucking manual, you fool!"*`);
             }
         }
     }
     
-    onStart() {}
+    // onStart() {}
 
-    onMessage() {}
+    // onMessage() {}
 
     start() {
         console.log(`[${this.name}] Bot started with configuration :`);
