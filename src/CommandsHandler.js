@@ -1,3 +1,10 @@
+/**
+ * @class CommandHandler
+ * @classdesc Manages all Commands for the bot, checking user rights, and allowing live
+ * modifications of the commands (loading, unloading, refreshing...).
+ * 
+ * @author HerrCraziDev <herrcrazi@gmail.com>
+ */
 
 const fs = require('fs');
 

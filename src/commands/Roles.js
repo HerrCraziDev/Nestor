@@ -1,3 +1,14 @@
+/**
+ * @class Roles
+ * @implements {Command}
+ * @classdesc A command for managing self-roles, attributed by the user himself
+ * upon invoking the command or reacting to a message bound to the command with
+ * a reaction bound to a configured role.
+ * 
+ * @author HerrCraziDev <herrcrazi@gmail.com>
+ */
+
+
 const Command = require('../Command');
 
 class Roles extends Command {
@@ -28,9 +39,11 @@ class Roles extends Command {
         let role = guild.roles.cache.find(r => r.name === roleName);
 
         if (role) {
-            console.log("Trying to give the role " + role.name, role);
-            await user.roles.add(role);
-            return true;
+            if ( !user.roles.cache.has(role.id) ) {
+                console.log("Trying to give the role " + role.name, role);
+                await user.roles.add(role);
+                return true;
+            } else throw new Error(`:ballot_box_with_check: You already have that role. Pretty based, eh chad?`);
         }
         else throw new Error(`:x: Whoops! I've searched far and wide and there's no such role in this server!`);
     }
@@ -40,7 +53,7 @@ class Roles extends Command {
         let role = guild.roles.cache.find(r => r.name === roleName);
 
         if (role) {
-            if (user.roles.cache.has(role.id)) {
+            if ( user.roles.cache.has(role.id) ) {
                 await user.roles.remove(role);
                 return true;
             }
@@ -58,7 +71,7 @@ class Roles extends Command {
     }
 
     printUsage() {
-        return `*Command **${this.name}** - ${this.abstract}*
+        return `*Command **${this.name}** - ${this.classdesc}*
             ${this.description}
             __Usage :__ \`${this.config.prefix}${this.name} ${this.usage}\`
         `;

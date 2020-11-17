@@ -1,3 +1,10 @@
+/**
+ * @interface Command
+ * @classdesc Base (virtual) class for all Commands. All commands must inherit
+ * from this class; which is a stub.
+ * 
+ * @author HerrCraziDev <herrcrazi@gmail.com>
+ */
 
 class Command {
     name = "stub"

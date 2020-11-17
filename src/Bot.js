@@ -1,3 +1,10 @@
+/**
+ * @class Bot
+ * @classdesc The base class for Nestor. Initiates the Discord.js client and all other 
+ * components (configuration, commands...).
+ * 
+ * @author HerrCraziDev <herrcrazi@gmail.com>
+ */
 
 const Discord = require('discord.js');
 const CommandsHandler = require('./CommandsHandler');
@@ -38,9 +45,8 @@ class Bot {
 
     // TODO : move this into CommandHandler to allow multiple scoped command handlers
     parse(message) {
-        console.log(`New message : ${message.content}`);
-
         if ( !message.author.bot && message.content.startsWith(this.config.prefix) ) {
+            console.log(`New message : ${message.content}`);
 
             let args = message.content.split(/ +/);
             let command = args[0].replace(this.config.prefix, '');

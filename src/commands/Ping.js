@@ -1,3 +1,10 @@
+/**
+ * @class Ping
+ * @implements {Command}
+ * @classdesc A simple Ping command, which answers "pong" to the user.
+ * 
+ * @author HerrCraziDev <herrcrazi@gmail.com>
+ */
 
 const Command = require('../Command');
 
