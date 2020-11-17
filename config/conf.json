@@ -3,9 +3,7 @@
     "name": "Nestor",
     "path": "self.nestor.bot",
     "scope": "dev",
-    "bot": {
-        "prefix": "!"
-    },
+    "prefix": "!",
     "admin": {
         "allow": true,
         "prefix": "@",
