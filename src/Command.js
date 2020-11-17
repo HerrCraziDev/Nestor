@@ -8,9 +8,10 @@ class Command {
     hidden = true
     admin = false
 
-    constructor(client) {
+    constructor(client, config) {
         //Generic constuctor ; client could not be there.
         this.client = client;
+        this.config = config;
     }
 
     execute(context, ...args) {

@@ -28,7 +28,7 @@ class CommandsHandler {
         if (fs.existsSync(path) || true) {
             try {
                 const Command = require(path);
-                let command = new Command(this.client);
+                let command = new Command(this.client, this.config);
 
                 this._commands.push(command.name);
                 this[command.name] = command;

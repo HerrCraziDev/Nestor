@@ -6,10 +6,7 @@ const { throws } = require('assert');
 const defaultConf = {
     version: "1.0.0",
     name: "default",
-    bot: {
-        prefix: '!',
-        roles: []
-    },
+    prefix: '!',
     admin: {
         allow: true,
         prefix: '@',
@@ -43,10 +40,10 @@ class Bot {
     parse(message) {
         console.log(`New message : ${message.content}`);
 
-        if ( !message.author.bot && message.content.startsWith(this.config.bot.prefix) ) {
+        if ( !message.author.bot && message.content.startsWith(this.config.prefix) ) {
 
             let args = message.content.split(/ +/);
-            let command = args[0].replace(this.config.bot.prefix, '');
+            let command = args[0].replace(this.config.prefix, '');
 
             if ( this.commands.has(command) ) {
                 this.commands[command].execute({ message }, ...args);
