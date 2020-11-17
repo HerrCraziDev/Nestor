@@ -9,8 +9,8 @@ class Roles extends Command {
     hidden = false
     admin = false
 
-    constructor(client) {
-        super(client);
+    constructor(client, config) {
+        super(client, config);
 
         this.client.on('messageReactionAdd', this.onReaction);
     }
@@ -57,6 +57,13 @@ class Roles extends Command {
         return guild.roles.cache.filter(r => r.name !== user.guild.roles.everyone.name);
     }
 
+    printUsage() {
+        return `*Command **${this.name}** - ${this.abstract}*
+            ${this.description}
+            __Usage :__ \`${this.config.prefix}${this.name} ${this.usage}\`
+        `;
+    }
+
     async execute(context, ...args) {
         let message = context.message;
         let user = context.message.member;
@@ -88,6 +95,8 @@ class Roles extends Command {
                     break;
             
                 default:
+                    console.log(this)
+                    message.channel.send(`\n:x: **Sorry, can't do that**\nAction \`${args[1]}\` does not exist.\n\n__Here is how to use the Roles command :__\n${this.printUsage()}`);
                     break;
             }
         } catch (e) {
