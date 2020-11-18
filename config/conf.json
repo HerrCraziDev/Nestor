@@ -4,6 +4,7 @@
     "path": "self.nestor.bot",
     "scope": "dev",
     "prefix": "!",
+    "guildsConfigPath": "./config/guilds/",
     "admin": {
         "allow": true,
         "prefix": "@",
