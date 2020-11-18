@@ -8,19 +8,9 @@
 
 const Discord = require('discord.js');
 const CommandsHandler = require('./CommandsHandler');
+const Configuration = require('./Configuration');
 const { throws } = require('assert');
 
-const defaultConf = {
-    version: "1.0.0",
-    name: "default",
-    prefix: '!',
-    admin: {
-        allow: true,
-        prefix: '@',
-        roles: []
-    },
-    guilds: []
-}
 
 class Bot {
     config = {}
@@ -32,9 +22,9 @@ class Bot {
 
 
     constructor( token, config ) {
-        this.config = {...defaultConf, ...config};
-        this.version = config.version || defaultConf.version;
-        this.name = config.name || defaultConf.name;
+        this.config = new Configuration(config);
+        this.version = this.config.bot.version;
+        this.name = this.config.bot.name;
         
         if ( !token || typeof token != 'string' ) throw `${__filename} : No API token provided.`;
         else this.token = token;
@@ -45,11 +35,11 @@ class Bot {
 
     // TODO : move this into CommandHandler to allow multiple scoped command handlers
     parse(message) {
-        if ( !message.author.bot && message.content.startsWith(this.config.prefix) ) {
+        if ( !message.author.bot && message.content.startsWith(this.config.bot.prefix) ) {
             console.log(`New message : ${message.content}`);
 
             let args = message.content.split(/ +/);
-            let command = args[0].replace(this.config.prefix, '');
+            let command = args[0].replace(this.config.bot.prefix, '');
 
             if ( this.commands.has(command) ) {
                 this.commands[command].execute({ message }, ...args);
@@ -66,7 +56,7 @@ class Bot {
 
     start() {
         console.log(`[${this.name}] Bot started with configuration :`);
-        console.log(this.config);
+        console.log(this.config.bot);
 
         this.client.once('ready', () => {
             console.log(`[${this.name}] Logged in as ${this.client.user.tag}`);
